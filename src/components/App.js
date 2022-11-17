@@ -7,12 +7,12 @@ import { useState } from "react";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
 
   function handleEditAvatarClick() {
-    setisEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
@@ -20,23 +20,18 @@ function App() {
   }
 
   function handleAddPlaceClick() {
-    setisAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(card) {
     setSelectedCard(card);
   }
 
-  function closeAllPopups(evt) {
-    if (
-      evt.target === evt.currentTarget ||
-      evt.target.classList.contains("popup__close-button")
-    ) {
-      setisEditAvatarPopupOpen(false);
-      setIsEditProfilePopupOpen(false);
-      setisAddPlacePopupOpen(false);
-      setSelectedCard({});
-    }
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard({});
   }
 
   function handlePopupClose(evt) {
@@ -50,7 +45,7 @@ function App() {
 
   return (
       <div className="body">
-        <div className="page" onKeyDown={handlePopupClose}>
+        <div className="page" /* onKeyDown={handlePopupClose} */>
           <Header />
           <Main
             onEditAvatar={handleEditAvatarClick}
@@ -59,10 +54,10 @@ function App() {
             onCardClick={handleCardClick}
           />
           <Footer />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <ImagePopup card={selectedCard} onClose={handlePopupClose} />
           <PopupWithForm
             isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
+            onClose={handlePopupClose}
             title={"Редактировать профиль"}
             button={"Сохранить"}
           >
@@ -98,7 +93,7 @@ function App() {
 
           <PopupWithForm
             isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
+            onClose={handlePopupClose}
             title={"Новое место"}
             button={"Создать"}
           >
@@ -131,7 +126,7 @@ function App() {
 
           <PopupWithForm
             isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
+            onClose={handlePopupClose}
             title={"Обновить аватар"}
             button={"Сохранить"}
           >
