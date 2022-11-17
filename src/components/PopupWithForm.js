@@ -1,24 +1,23 @@
-function PopupWithForm(props) {
+function PopupWithForm({isOpen, onClose, title, name, children, button}) {
   return (
     <div
-      className={props.isOpen ? "popup popup_show" : "popup"}
-      onClick={props.onClose}
+      className={isOpen ? "popup popup_show" : "popup"}
+      onClick={onClose}
     >
       <div className="popup__content">
-        <legend className="popup__title">{props.title}</legend>
+        <legend className="popup__title">{title}</legend>
         <form
-          className={`popup__form popup__form_${props.name}`}
-          name={props.name}
-          noValidate
+          className={`popup__form popup__form_${name}`}
+          name={name}
         >
-          {props.children}
+          {children}
           <button
-            className={`popup__save-button popup__save-button_${props.name}`}
+            className={`popup__save-button popup__save-button_${name}`}
             id="submit-button"
-            name={props.name}
+            name={name}
             type="submit"
           >
-            {props.button}
+            {button}
           </button>
         </form>
         <button

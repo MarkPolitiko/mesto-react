@@ -39,7 +39,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
                 type="button"
                 aria-label="Редактировать"
                 onClick={onEditProfile}
-              ></button>
+              />
             </div>
             <p className="profile__subtitle">{userDescription}</p>
           </div>
@@ -49,7 +49,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
           type="button"
           aria-label="Добавить"
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
 
       <section className="elements">

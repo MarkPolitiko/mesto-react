@@ -8,7 +8,7 @@ function Card({ card, onCardClick }) {
         src={card.link}
         className="elements__image"
         alt={card.name}
-        onClick={() => handleClick()}
+        onClick={handleClick}
       />
       <button className="elements__delete-button" aria-label="Удалить"></button>
       <div className="elements__description">

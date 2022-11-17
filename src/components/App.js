@@ -6,12 +6,17 @@ import PopupWithForm from "./PopupWithForm";
 import { useState } from "react";
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+
   function handleEditAvatarClick() {
     setisEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
@@ -28,27 +33,24 @@ function App() {
       evt.target.classList.contains("popup__close-button")
     ) {
       setisEditAvatarPopupOpen(false);
-      setEditProfilePopupOpen(false);
+      setIsEditProfilePopupOpen(false);
       setisAddPlacePopupOpen(false);
       setSelectedCard({});
     }
   }
 
-  /*   function handlePopupCloseByEsc(evt) {
-    if (evt.key === "Escape") {
+  function handlePopupClose(evt) {
+    if (
+      evt.target === evt.currentTarget ||
+      evt.target.classList.contains("popup__close-button")
+    ) {
       closeAllPopups();
     }
-  } */
-
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({});
+  }
 
   return (
-    <>
       <div className="body">
-        <div className="page" /* onKeyDown={handlePopupCloseByEsc} */>
+        <div className="page" onKeyDown={handlePopupClose}>
           <Header />
           <Main
             onEditAvatar={handleEditAvatarClick}
@@ -127,14 +129,6 @@ function App() {
             </div>
           </PopupWithForm>
 
-          {/* <PopupWithForm
-            title={"Вы уверены?"}
-            button={"Да"}
-          >
-            <div className="popup__input-container ">
-            </div>
-          </PopupWithForm> */}
-
           <PopupWithForm
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
@@ -155,7 +149,6 @@ function App() {
           </PopupWithForm>
         </div>
       </div>
-    </>
   );
 }
 
