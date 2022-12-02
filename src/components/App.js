@@ -70,7 +70,7 @@ function App() {
     api
       .deleteCard(cardToDelete._id)
       .then(() => {
-        setCards(cards.filter((i) => i._id !== cardToDelete._id));
+        setCards(prevCard => prevCard.filter((i) => i._id !== cardToDelete._id));
         closeAllPopups();
       })
       .catch((err) => console.log(err));

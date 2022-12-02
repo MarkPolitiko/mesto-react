@@ -1,6 +1,5 @@
 import { useRef, useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { api } from "../utils/Api";
 import Card from "./Card";
 
 function Main({
@@ -15,10 +14,6 @@ function Main({
 
   const currentUser = useContext(CurrentUserContext);
   const avatarRef = useRef();
-
-  useRef(() => {
-    avatarRef.current.src = currentUser.avatar;
-  }, [currentUser]);
 
   return (
     <div className="content">

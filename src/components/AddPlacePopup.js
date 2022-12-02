@@ -1,15 +1,20 @@
 import PopupWithForm from "./PopupWithForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
 
+  useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen])
+
   function handleChangeName(event) {
     setName(event.target.value);
   }
 
-  function handleLinkChange(event) {
+  function handleChangeLink(event) {
     setLink(event.target.value);
   }
 
@@ -19,26 +24,19 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       name: name,
       link: link,
     });
-    setName("");
-    setLink("");
   }
-
-  function handleClose() {
-    setName("");
-    setLink("");
-    onClose()
-}
 
   return (
     <PopupWithForm
       isOpen={isOpen}
-      onClose={handleClose}
+      onClose={onClose}
       onSubmit={handleSubmit}
       title={"Новое место"}
       button={"Создать"}
     >
       <div className="popup__input-container">
         <input
+          value={name}
           className="popup__input popup__input_type_place"
           id="place-input"
           onChange={handleChangeName}
@@ -54,9 +52,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       </div>
       <div className="popup__input-container">
         <input
+          value={link}
           className="popup__input popup__input_type_link"
           id="link-input"
-          onChange={handleLinkChange}
+          onChange={handleChangeLink}
           name="link"
           type="url"
           placeholder="Ссылка на картинку"
